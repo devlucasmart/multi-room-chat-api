@@ -21,7 +21,7 @@ jobs:
       - name: Log in to Docker Hub
         env:
           DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
-        run: docker login -u lord143 -p "${DOCKERHUB_TOKEN}"
+        run: echo "${DOCKERHUB_TOKEN}" | docker login -u lord143 --password-stdin
 
       # Enviar a imagem para o Docker Hub
       - name: Push image to Docker Hub
