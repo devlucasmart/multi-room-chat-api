@@ -15,7 +15,7 @@ jobs:
 
       # Criar o Docker config com o token de acesso
       - name: Configurar Docker config
-        run: echo "{\"auths\":{\"https://index.docker.io/v1/\":{\"auth\":\"$(echo -n lord143:${{ secrets.DOCKERHUB_TOKEN }} | base64)\"}}}" > ~/.docker/config.json
+        run: echo "{\"auths\":{\"https://index.docker.io/v1/\":{\"auth\":\"$(echo -n lord143:${{ DOCKERHUB_TOKEN }} | base64)\"}}}" > ~/.docker/config.json
 
       # Construir a imagem Docker
       - name: Build Docker image
