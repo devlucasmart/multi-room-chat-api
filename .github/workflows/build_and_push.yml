@@ -19,7 +19,9 @@ jobs:
 
       # Autenticar no Docker Hub
       - name: Log in to Docker Hub
-        run: docker login -u lord143 -p ${{ secrets.DOCKERHUB_TOKEN }}
+        env:
+          DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+        run: docker login -u lord143 -p "${DOCKERHUB_TOKEN}"
 
       # Enviar a imagem para o Docker Hub
       - name: Push image to Docker Hub
