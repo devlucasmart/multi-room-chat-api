@@ -13,15 +13,13 @@ jobs:
       - name: Checkout código
         uses: actions/checkout@v2
 
+      # Criar o Docker config com o token de acesso
+      - name: Configurar Docker config
+        run: echo "{\"auths\":{\"https://index.docker.io/v1/\":{\"auth\":\"$(echo -n lord143:${{ secrets.DOCKERHUB_TOKEN }} | base64)\"}}}" > ~/.docker/config.json
+
       # Construir a imagem Docker
       - name: Build Docker image
         run: docker build -t lord143/proposta-api .
-
-      # Autenticar no Docker Hub
-      - name: Log in to Docker Hub
-        env:
-          DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
-        run: echo "${DOCKERHUB_TOKEN}" | docker login -u lord143 --password-stdin
 
       # Enviar a imagem para o Docker Hub
       - name: Push image to Docker Hub
